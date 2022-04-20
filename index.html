@@ -64,16 +64,17 @@
             <p>Chord Types</p>
             <input name="chordTypeCheckboxes" type="checkbox" checked="checked" value="Major"><label>Major</label>
             <input name="chordTypeCheckboxes" type="checkbox" checked="checked" value="Minor"><label>Minor</label>
-            <input name="chordTypeCheckboxes" type="checkbox" checked="checked" value="Minor"><label>Major 7th</label>
-            <input name="chordTypeCheckboxes" type="checkbox" checked="checked" value="Minor"><label>Minor 7th</label>
-            <input name="chordTypeCheckboxes" type="checkbox" checked="checked" value="Minor"><label>Dom 7th</label>
+            <input name="chordTypeCheckboxes" type="checkbox" checked="checked" value="Major 7th"><label>Major 7th</label>
+            <input name="chordTypeCheckboxes" type="checkbox" checked="checked" value="Minor 7th"><label>Minor 7th</label>
+            <input name="chordTypeCheckboxes" type="checkbox" checked="checked" value="Dom 7th"><label>Dom 7th</label>
         </div>
         <div class="settings">
             <p>I made this for Paul David's Next Level Playing course. I wanted a tool that would help me learn the notes on the fretboard and work
                 on my speed at fingering random chords and since I couldn't find exactly what I wanted I threw this together.</p>
             <ul>
                 <li>Press the spacebar to show a random chord/note based on the settings to the left</li>
-                <li>Use the Frequency settings to show a chord/note at the specified interval.</li>
+                <li>The Chord Finder game only uses the E and A strings</li>
+                <li>Use the Frequency settings to show a chord/note at the specified interval</li>
             </ul>
         </div>
         <hr>
@@ -94,7 +95,7 @@
     <script>
         var strings = ['E','A','D','G','b','e',];
         var notes = ['Ab','A','A#','Bb','B','C','C#','Db','D','D#','Eb','E','F','F#','Gb','G','G#'];
-        var chordTypes = ['Major', 'Minor'];
+        var chordTypes = ['Major', 'Minor', 'Major 7th', 'Minor 7th', 'Dom 7th'];
         var timedInterval;
         document.getElementById("naturals").addEventListener('change', function(){
             var checked = document.getElementById("naturals").checked;
