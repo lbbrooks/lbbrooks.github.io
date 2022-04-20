@@ -1,0 +1,188 @@
+<html>
+    <head>
+        <style>
+            #main{
+                /*text-align: center;*/
+                width: 25vw;
+                margin: 0 auto;
+                font-size: 40px;
+            }
+            label:after{
+                content: "";
+                display:block;
+            }
+            .settings{
+                display: inline-block;
+                border: 1px solid;
+                vertical-align: top;
+            }
+
+        </style>
+        
+    </head>
+    <body>
+        <div class="settings">
+            <p>Game</p>
+            <input type="radio" name="game" checked="checked" value="Chord Finder"><label>Chord Finder</label>
+            <input type="radio" name="game" value="Note Finder"><label>Note Finder</label>
+        </div>
+        <div class="settings">
+            <p>Frequency</p>
+            <input type="text" id="rate" value="5">
+            <button id="timed-start"  onclick="StartTimed()" type="button" value="Start">Start</button><button onclick="StopTimed();">Stop</button>
+        </div>
+        <div class="settings">
+            <p>Notes</p>
+            <div class="settings">
+                <input id="naturals" type="checkbox" checked="checked"><label>Naturals</label>
+                <input class="notes naturals" type="checkbox" checked="checked" value="A"><label>A</label>
+                <input class="notes naturals" type="checkbox" checked="checked" value="B"><label>B</label>
+                <input class="notes naturals" type="checkbox" checked="checked" value="C"><label>C</label>
+                <input class="notes naturals" type="checkbox" checked="checked" value="D"><label>D</label>
+                <input class="notes naturals" type="checkbox" checked="checked" value="E"><label>E</label>
+                <input class="notes naturals" type="checkbox" checked="checked" value="F"><label>F</label>
+                <input class="notes naturals" type="checkbox" checked="checked" value="G"><label>G</label>
+            </div>
+            <div class="settings">
+                <input id="sharps" type="checkbox" checked="checked"><label>Sharps</label>
+                <input class="notes sharps" type="checkbox" checked="checked" value="A#"><label>A#</label>
+                <input class="notes sharps" type="checkbox" checked="checked" value="C#"><label>C#</label>
+                <input class="notes sharps" type="checkbox" checked="checked" value="D#"><label>D#</label>
+                <input class="notes sharps" type="checkbox" checked="checked" value="F#"><label>F#</label>
+                <input class="notes sharps" type="checkbox" checked="checked" value="G#"><label>G#</label>
+            </div>
+            <div class="settings">
+                <input id="flats" type="checkbox" checked="checked"><label>Flats</label>
+                <input class="notes flats" type="checkbox" checked="checked" value="Ab"><label>Ab</label>
+                <input class="notes flats" type="checkbox" checked="checked" value="Ab"><label>Bb</label>
+                <input class="notes flats" type="checkbox" checked="checked" value="Db"><label>Db</label>
+                <input class="notes flats" type="checkbox" checked="checked" value="Eb"><label>Eb</label>
+                <input class="notes flats" type="checkbox" checked="checked" value="Gb"><label>Gb</label>
+            </div>
+        </div>
+        <div class="settings">
+            <p>Chord Types</p>
+            <input name="chordTypeCheckboxes" type="checkbox" checked="checked" value="Major"><label>Major</label>
+            <input name="chordTypeCheckboxes" type="checkbox" checked="checked" value="Minor"><label>Minor</label>
+        </div>
+        <hr>
+        <div id="main">
+            <div style="display: inline-block; vertical-align: top; text-align: right; border-right: 1px solid black;">
+                <p>String:</p>
+                <p>Note:</p>
+                <p>Chord Type:</p>
+            </div>
+            <div style="display: inline-block; vertical-align: top; text-align: left; border-left: 1px solid black;">
+                <p id="string">&nbsp</p>
+                <p id="note">&nbsp</p>
+                <p id="chordType">&nbsp</p>
+            </div>
+            
+        </div>
+    </body>
+    <script>
+        var strings = ['E','A','D','G','b','e',];
+        var notes = ['Ab','A','A#','Bb','B','C','C#','Db','D','D#','Eb','E','F','F#','Gb','G','G#'];
+        var chordTypes = ['Major', 'Minor'];
+        var timedInterval;
+        document.getElementById("naturals").addEventListener('change', function(){
+            var checked = document.getElementById("naturals").checked;
+            var boxes = document.getElementsByClassName('naturals')
+            
+            for(var i = 0; i < boxes.length; i++){
+                boxes[i].checked = checked;
+            }
+            NotesUpdate();
+        });
+        document.getElementById("sharps").addEventListener('change', function(){
+            var checked = document.getElementById("sharps").checked;
+            var boxes = document.getElementsByClassName('sharps')
+            
+            for(var i = 0; i < boxes.length; i++){
+                boxes[i].checked = checked;
+            }
+            NotesUpdate();
+        })
+        document.getElementById("flats").addEventListener('change', function(){
+            var checked = document.getElementById("flats").checked;
+            var boxes = document.getElementsByClassName('flats')
+            
+            for(var i = 0; i < boxes.length; i++){
+                boxes[i].checked = checked;
+            }
+            NotesUpdate();
+        })
+        var NotesUpdate = function(){
+            notes = [];
+            document.get
+            cb = document.getElementsByClassName('notes');
+            for(var i = 0; i < cb.length; i++){
+                if(cb[i].checked) notes.push(cb[i].value);
+            }
+        }
+        var ChordTypesUpdate = function(){
+            chordTypes = [];
+            ct = document.getElementsByName('chordTypeCheckboxes')
+            for(var i = 0; i < ct.length; i++){
+                if(ct[i].checked) chordTypes.push(ct[i].value);
+            }
+        }
+        var StartTimed = function(){
+            var freq = Number.parseInt(document.getElementById("rate").value) * 1000;
+            Advance();
+            timedInterval = setInterval(Advance, freq);
+        }
+        var StopTimed = function(){
+            clearInterval(timedInterval);
+
+        }
+        var noteCheckboxes = document.getElementsByClassName('notes');
+        for(var i = 0; i < noteCheckboxes.length; i++){
+            noteCheckboxes[i].addEventListener('change', NotesUpdate);
+        }
+
+        var chordTypeCheckboxes = document.getElementsByName('chordTypeCheckboxes');
+        for(var i = 0; i < chordTypeCheckboxes.length; i++){
+            chordTypeCheckboxes[i].addEventListener('change', ChordTypesUpdate);
+        }
+
+        
+        function MyRandom(max){
+            return Math.floor(Math.random() * max);
+        }
+        var KeyPressed = function(e){
+            if(e.keyCode == 32) Advance();
+        }
+        var Advance = function(){
+            var ele = document.getElementsByName('game');
+            var game;
+            for(i = 0; i < ele.length; i++) {
+                if(ele[i].checked) game = ele[i].value;
+            }
+
+            var stringp = document.getElementById('string');
+            var notep = document.getElementById('note');
+            var chordTypep = document.getElementById('chordType');
+            if(game == "Chord Finder"){
+                
+                var string = strings[MyRandom(2)];
+                var note = notes[MyRandom(notes.length)];
+                var chordType = chordTypes[MyRandom(chordTypes.length)];
+
+                stringp.innerHTML = string;
+                notep.innerHTML = note;
+                chordTypep.innerHTML = chordType;
+            }
+
+            if(game == "Note Finder"){
+                var string = strings[MyRandom(strings.length)];
+                var note = notes[MyRandom(notes.length)];
+
+                stringp.innerHTML = string;
+                notep.innerHTML = note;
+                chordTypep.innerHTML = '';
+            }
+        }
+        document.addEventListener('keydown', Advance)
+    </script>
+</html>
