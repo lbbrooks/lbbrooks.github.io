@@ -1,11 +1,11 @@
 <html>
     <head>
+        <meta content="width=device-width, initial-scale=1" name="viewport" />
+
         <style>
             #main{
-                /*text-align: center;*/
-                width: 25vw;
                 margin: 0 auto;
-                font-size: 40px;
+                font-size: 20px;
             }
             label:after{
                 content: "";
@@ -17,6 +17,32 @@
                 vertical-align: top;
             }
 
+            #labels,#randoms{
+                display: inline-block; 
+                vertical-align: top;
+                width: 49%;
+            }
+            #labels{
+                text-align: right;
+                border-right: 1px solid black;
+            }
+            #randoms{
+                text-align: left;
+                border-left: 1px solid black;
+            }
+            #next{
+                margin-top: 50px; 
+                height: 100px; 
+                width: 50%;
+            }
+            @media(min-width: 767px){
+                #main{
+                    font-size: 40px;
+                }
+                #next{
+                    width: 15%;
+                }
+            }
         </style>
         
     </head>
@@ -72,22 +98,26 @@
             <p>I made this for Paul David's Next Level Playing course. I wanted a tool that would help me learn the notes on the fretboard and work
                 on my speed at fingering random chords and since I couldn't find exactly what I wanted I threw this together.</p>
             <ul>
-                <li>Press the spacebar to show a random chord/note based on the settings to the left</li>
+                <li>Press the spacebar or click the next button to show a random chord/note based on the settings</li>
                 <li>The Chord Finder game only uses the E and A strings</li>
                 <li>Use the Frequency settings to show a chord/note at the specified interval</li>
             </ul>
         </div>
         <hr>
         <div id="main">
-            <div style="display: inline-block; vertical-align: top; text-align: right; border-right: 1px solid black;">
+            <div id="labels">
                 <p>String:</p>
                 <p>Note:</p>
                 <p>Chord Type:</p>
             </div>
-            <div style="display: inline-block; vertical-align: top; text-align: left; border-left: 1px solid black;">
+            <div id="randoms">
                 <p id="string">&nbsp</p>
                 <p id="note">&nbsp</p>
                 <p id="chordType">&nbsp</p>
+            </div>
+
+            <div style="text-align: center;">
+                <button id="next" onclick="Advance()">NEXT</button>
             </div>
             
         </div>
